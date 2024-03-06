@@ -9,11 +9,6 @@ fun formatDate(date: String) : String {
 
     // Parsing the original string to a Date object
     val date = originalFormat.parse(date)
-
-//    // Formatting the Date object to the new format
-//    date?.let {
-//        val formattedDateString = newFormat.format(it) ? ""
-//    }
     return newFormat.format(date)
 
 }

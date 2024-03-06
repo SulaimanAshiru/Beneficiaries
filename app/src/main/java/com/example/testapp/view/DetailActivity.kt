@@ -17,16 +17,19 @@ class DetailActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         val beneficiary: Beneficiary? = intent.extras?.getParcelable("beneficiary")
 
+        // Created a ScrollView for scrolling content if needed
         val scrollView = ScrollView(this).apply {
             layoutParams = LinearLayout.LayoutParams(WRAP_CONTENT, WRAP_CONTENT)
         }
 
+        // Created a LinearLayout as the container
         val container = LinearLayout(this).apply {
             orientation = LinearLayout.VERTICAL
             layoutParams = LinearLayout.LayoutParams(WRAP_CONTENT, WRAP_CONTENT)
             setPadding(32, 32, 32, 32)
         }
 
+        // Dynamically added TextViews for Beneficiary details
         beneficiary?.let {
             addDetailTextView(container, "Name", "${it.firstName} ${it.lastName}")
             addDetailTextView(container, "Type", it.beneType)
@@ -55,6 +58,7 @@ class DetailActivity : ComponentActivity() {
         }
         container.addView(titleView)
 
+        //content textView
         val contentView = TextView(this).apply {
             text = content
             textSize = 14f
