@@ -1,0 +1,32 @@
+fun addChildren(nums: Array<Int>, parent: ViewGroup) {
+    when {
+        nums.size == 1 -> {
+            val newItem = createNewItem(nums[0])
+            parent.addView(newItem, ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT))
+        }
+        nums.size == 2 -> {
+            val total = nums[0] + nums[1]
+            val weight1 = (nums[0] * 100) / total
+            val weight2 = (nums[1] * 100) / total
+
+            for (i in 0 until 2) {
+                val newItem = createNewItem(nums[i])
+                val layoutParams = LinearLayout.LayoutParams(0, ViewGroup.LayoutParams.WRAP_CONTENT)
+                layoutParams.weight = if (i == 0) weight1.toFloat() else weight2.toFloat()
+                parent.addView(newItem, layoutParams)
+            }
+        }
+        else -> {
+            val mid = nums.size / 2
+            loadChildren(nums.copyOfRange(0, mid), parent)
+            loadChildren(nums.copyOfRange(mid, nums.size), parent)
+        }
+    }
+}
+
+fun createNewItem(num: Int): TextView {
+    val context = parent.context
+    val newItem = TextView(context)
+    newItem.text = num.toString()
+    return newItem
+}
