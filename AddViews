@@ -1,0 +1,27 @@
+fun addViews(
+    context: Context,
+    parentView: LinearLayout,
+    numbers: Array<Int>,
+    startIndex: Int = 0,
+    endIndex: Int = numbers.size
+) {
+    if (startIndex >= endIndex) return
+    val sum = numbers.slice(startIndex until endIndex).sum()
+    val midIndex = (startIndex + endIndex) / 2
+
+    addViews(context, parentView, numbers, startIndex, midIndex)
+
+    addViews(context, parentView, numbers, midIndex, endIndex)
+
+    if (endIndex - startIndex == 1) {
+        val viewHeight = 100 * numbers[startIndex] / sum
+        val childView = View(context).apply {
+            layoutParams = LinearLayout.LayoutParams(
+                ViewGroup.LayoutParams.MATCH_PARENT,
+                viewHeight
+            )
+            setBackgroundColor(Color.BLUE)
+        }
+        parentView.addView(childView)
+    }
+}
